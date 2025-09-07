@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Reem Store — ريـم ستور</title>
+<link img"="" rel="img href="/>
+<style>
+  /* ===================== THEME (Rose-Gold + Soft Purple Accents) ===================== */
+  :root{
+    --rose:#e9c7c1;           /* soft rose */
+    --rose-deep:#d9a9a0;      /* deeper rose */
+    --ink:#f298dd;            /* elegant ink for text */
+    --bg:#fff8fb;             /* warm paper */
+    --card:#ffffff;           /* cards */
+    --muted:#6a4c9c;          /* soft purple accent */
+    --gold:#d8b46a;           /* soft gold accent */
+    --brand:#c07ea9;          /* rose-lilac blend for buttons */
+    --brand-2:#b896ff;        /* airy accent */
+    --chip:#f6e9f2;           /* chip bg */
+    --shadow:0 10px 28px rgba(42,30,53,.10);
+    --radius:16px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family: "Poppins","Tajawal",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  /* ===================== HEADER ===================== */
+  header{
+    position: sticky; top:0; z-index:1000;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(90deg, #ffffffdd, #fff7fadd);
+    border-bottom: 1px solid #f0e2ea;
+  }
+  .nav{
+    max-width:1200px; margin:0 auto;
+    display:flex; align-items:center; gap:1rem;
+    padding:.7rem 1rem;
+  }
+  .logo{
+    height:42px; width:auto; border-radius:12px;
+    box-shadow:0 6px 14px rgba(220, 117, 184, 0.652);
+  }
+  .brand-title{
+    font-weight:900; letter-spacing:.3px;
+    background: linear-gradient(90deg, var(--rose-deep), var(--muted));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    margin-inline-start:.4rem;
+  }
+  .nav-links{ margin-inline-start:auto; display:flex; gap:.8rem; align-items:center }
+  .nav-links a{
+    text-decoration:none; color:var(--ink); font-weight:700;
+    padding:.4rem .7rem; border-radius:999px;
+  }
+  .nav-links a:hover{ background:#f7ecf2 }
+  .lang-btn{
+    border:0; cursor:pointer; font-weight:800;
+    padding:.45rem .9rem; border-radius:999px; color:#fff;
+    background: linear-gradient(135deg, var(--brand), var(--rose-deep));
+    box-shadow:0 8px 20px rgba(192,126,169,.35);
+  }
+
+  /* ===================== HERO ===================== */
+  .hero{
+    position:relative; overflow:hidden; text-align:center; color:#34233f;
+    background:
+      radial-gradient(1200px 500px at 80% -10%, #f7e5ec 10%, transparent 60%),
+      radial-gradient(900px 450px at 10% -10%, #efe2ff 10%, transparent 60%),
+      linear-gradient(180deg, #fff, #ffeef3);
+    padding:3.2rem 1rem 2.3rem;
+  }
+  .hero .logo-big{ width:160px; border-radius:26px; filter:drop-shadow(0 0 16px rgba(201,144,194,.55)); }
+  .hero h1{
+    font-size:clamp(26px, 4.8vw, 42px);
+    margin:.8rem 0 .4rem;
+    background: linear-gradient(90deg, #b25c9a, #7a5fb9, #b9865e);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    font-weight:900;
+  }
+  .hero p{
+    max-width:820px; margin:0 auto .9rem; line-height:1.75; color:#5b476d; font-weight:600;
+  }
+  .hero .cta{
+    display:inline-flex; align-items:center; gap:.5rem;
+    text-decoration:none; color:#fff; font-weight:900;
+    background: linear-gradient(135deg, var(--rose-deep), var(--muted));
+    padding:.7rem 1.1rem; border-radius:999px; box-shadow: var(--shadow);
+    margin-top:.4rem;
+  }
+  .subnote{
+    margin-top:.7rem; color:#744f85; font-weight:700;
+  }
+
+  /* sparkles */
+  .sparkle{
+    position:absolute; pointer-events:none; opacity:.7; filter:blur(.2px);
+    animation: float 6s ease-in-out infinite;
+  }
+  .s1{ top:14%; left:8% }
+  .s2{ top:30%; right:10%; animation-delay:1.2s }
+  .s3{ bottom:10%; left:16%; animation-delay:2.1s }
+  @keyframes float { 0%{transform:translateY(0)} 50%{transform:translateY(-10px)} 100%{transform:translateY(0)} }
+
+  /* ===================== JUMP BAR + FILTERS ===================== */
+  .toolbar{
+    position:sticky; top:64px; z-index:900;
+    background:#fff; border-top:1px solid #f3e7ed; border-bottom:1px solid #f3e7ed;
+  }
+  .toolbar-inner{
+    max-width:1200px; margin:0 auto; padding:.8rem 1rem;
+    display:flex; flex-wrap:wrap; gap:.6rem; align-items:center;
+  }
+  .chip{
+    text-decoration:none; color:#4b315a; font-weight:800;
+    background: var(--chip); border:1px solid #efdeea;
+    padding:.35rem .8rem; border-radius:999px; white-space:nowrap;
+  }
+  .chip:hover{ background:#f2e3ee }
+
+  .filters{ margin-inline-start:auto; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center }
+  .search{
+    padding:.55rem .8rem; border:1px solid #eadbe4; border-radius:999px; min-width:220px;
+    background:#fff;
+  }
+  .price{
+    display:flex; gap:.4rem; align-items:center; background:#fff; border:1px solid #eadbe4; border-radius:999px; padding:.35rem .6rem;
+  }
+  .price input{ width:90px; border:0; outline:0; padding:.3rem; background:transparent }
+  .small-btn{
+    border:0; border-radius:999px; padding:.45rem .8rem; cursor:pointer; font-weight:800; color:#fff;
+    background: linear-gradient(135deg, var(--brand), var(--rose-deep));
+  }
+
+  /* ===================== SECTIONS / ACCORDION ===================== */
+  section{ padding:1.6rem 1rem }
+  .wrap{ max-width:1200px; margin:0 auto }
+  details{
+    background: linear-gradient(180deg, #fff, #fff8fb);
+    border:1px solid #f1dfe8; border-radius:18px; margin:.8rem 0; box-shadow: var(--shadow);
+  }
+  summary{
+    list-style:none; cursor:pointer; padding:1rem 1.1rem; display:flex; align-items:center; gap:.6rem;
+    font-weight:900; color:#5f3a76;
+  }
+  summary::-webkit-details-marker{ display:none }
+  .cat-note{ margin:-.4rem 1.1rem .9rem 1.1rem; color:#7a5e9a; font-weight:700 }
+
+  /* ===================== GRID + CARDS ===================== */
+  .grid{
+    display:grid; gap:1rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding: 0 1.1rem 1.2rem 1.1rem;
+  }
+  .card{
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: .9rem;
+    display:flex; flex-direction:column; gap:.55rem; text-align:center;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .card:hover{ transform: translateY(-4px); box-shadow: 0 16px 36px rgba(42,30,53,.16) }
+  .carousel{ position:relative; overflow:hidden; border-radius:12px }
+  .carousel img{ width:100%; display:none; aspect-ratio:4/3; object-fit:cover }
+  .carousel img.active{ display:block }
+  .dots{ display:flex; justify-content:center; gap:.3rem; margin-top:.45rem }
+  .dot{ width:8px; height:8px; border-radius:50%; background:#eadbf5 }
+  .dot.active{ background: var(--muted) }
+  .title{ font-weight:900; color:#3d2959; margin-top:.2rem }
+  .desc{ font-size:.98rem; color:#4f3d66; line-height:1.6; min-height:3.6em }
+  .price-tag{
+    font-weight:900; color:#8a5fb3; background:#f4ecff; display:inline-block; padding:.25rem .6rem;
+    border-radius:999px; border:1px solid #e7dbff;
+  }
+  .quote{ font-style:italic; color:#6c4c96; font-size:.92rem }
+
+  .cta-row{ display:flex; justify-content:center; gap:.45rem; flex-wrap:wrap; margin-top:.35rem }
+  .ask, .view{
+    text-decoration:none; font-weight:900; padding:.5rem .9rem; border-radius:999px; display:inline-flex; align-items:center; gap:.4rem;
+  }
+  .ask{ background: linear-gradient(135deg, var(--brand), var(--gold)); color:#fff }
+  .ask:hover{ filter:brightness(1.05) }
+  .view{ color:#6a4c9c; background:#f7efff; border:1px solid #ebddff }
+  .badge{ font-size:.75rem; color:#b07c5d; background:#fff2ea; border:1px solid #f3dfd5; padding:.1rem .5rem; border-radius:999px }
+
+  /* ===================== CONTACT + FOOTER ===================== */
+  .contact{
+    background: linear-gradient(180deg, #ffffff, #fff3f7);
+    border-top:1px solid #f1e2ea; text-align:center; padding:2rem 1rem;
+  }
+  .linkpill{
+    display:inline-flex; align-items:center; gap:.4rem; color:#fff; text-decoration:none; font-weight:900;
+    background: linear-gradient(135deg, var(--rose-deep), var(--muted));
+    padding:.6rem 1rem; border-radius:999px; margin:.25rem; box-shadow: var(--shadow);
+  }
+  .qr{ width:160px; border-radius:14px; box-shadow: var(--shadow); margin-top:.8rem }
+  footer{ background:#2b2036; color:#fff; text-align:center; padding:1rem }
+
+  /* ===================== FLOATING BUTTONS ===================== */
+  .fab{
+    position:fixed; right:16px; z-index:1200; width:56px; height:56px;
+    border-radius:50%; display:grid; place-items:center; box-shadow:0 16px 32px rgba(0,0,0,.22);
+    text-decoration:none; color:#fff; font-size:0;
+  }
+  .fab svg{ width:26px; height:26px }
+  .fab.ig{ bottom:96px; background: radial-gradient(circle at 30% 110%, #fdf497 10%, #fdf497 30%, #fd5949 60%, #d6249f 80%, #285AEB 100%) }
+  .fab.wa{ bottom:24px; background:#25d366 }
+  .fab:hover{ transform: translateY(-2px) }
+
+  /* ===================== RESPONSIVE TWEAKS ===================== */
+  @media (max-width:600px){
+    .nav-links a{ display:none }
+    .filters{ width:100%; justify-content:stretch }
+    .search{ flex:1 }
+  }
+</style>
+</head>
+<body>
+<!-- ===================== HEADER ===================== -->
+<header>
+<div class="nav">
+<img alt="QR لفتح إنستغرام reemrm_x1" class="logo" src="img/qr.jpg"/>
+<div class="brand-title">Reem Store • ريـم ستور</div>
+<nav class="nav-links">
+<a data-ar="الرئيسية" data-en="Home" href="#home">الرئيسية</a>
+<a data-ar="تسوق" data-en="Shop" href="#shop">تسوق</a>
+<a data-ar="تواصل" data-en="Contact" href="#contact">تواصل</a>
+</nav>
+<button aria-label="Language" class="lang-btn" id="langBtn">EN</button>
+</div>
+</header>
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="home">
+<img alt="Reem Store" class="logo-big" src="img/logo.jpg"/>
+<h1 data-ar="لحظاتكِ تستحق أن تُزَيَّن بأناقة." data-en="Your moments deserve to be adorned with elegance.">
+    لحظاتكِ تستحق أن تُزَيَّن بأناقة.
+  </h1>
+<p data-ar="نصمّم لكِ كل ما تحلمين به: أوشحة تخرّج، بوكيهات، هدايا وإبداعات مُخصّصة. وإن لم تجديها هنا—صنعُها لكِ يسعدنا." data-en="We create whatever you dream of: graduation scarves, bouquets, gifts and personalized pieces. If it’s not listed—just ask, we’ll craft it for you.">
+     نصمّم لكِ كل ما تحلمين به: أوشحة تخرّج، بوكيهات، هدايا وإبداعات مُخصّصة. وإن لم تجديها هنا—صنعُها لكِ يسعدنا.
+  </p>
+<a class="cta" data-ar="ابدئي التسوّق" data-en="Shop Now" href="#shop">ابدئي التسوّق ✨</a>
+<div class="subnote" data-ar="نوفّر أي منتج ترغبين به—حتى لو غير موجود بالموقع. للمزيد زورينا على إنستغرام." data-en="We provide anything you need—even if it’s not listed. For more, visit our Instagram.">
+       نوفّر أي منتج ترغبين به—even لو غير موجود بالموقع. للمزيد زورينا على إنستغرام.
+  </div>
+<!-- soft sparkles -->
+<svg class="sparkle s1" fill="none" height="44" viewbox="0 0 44 44" width="44"><circle cx="22" cy="22" fill="#EBC9D1" r="2"></circle><circle cx="7" cy="12" fill="#D8B46A" r="1.6"></circle></svg>
+<svg class="sparkle s2" fill="none" height="52" viewbox="0 0 44 44" width="52"><circle cx="22" cy="22" fill="#DFC7FF" r="2"></circle><circle cx="34" cy="10" fill="#C07EA9" r="1.6"></circle></svg>
+<svg class="sparkle s3" fill="none" height="44" viewbox="0 0 44 44" width="44"><circle cx="12" cy="32" fill="#E9C7C1" r="1.8"></circle><circle cx="26" cy="8" fill="#B896FF" r="1.2"></circle></svg>
+</section>
+<!-- ===================== JUMP BAR + FILTERS ===================== -->
+<div class="toolbar" id="shop">
+<div class="toolbar-inner">
+<a class="chip" data-ar="التخرّج" data-en="Graduation" href="#cat-graduation">التخرّج</a>
+<a class="chip" data-ar="بوكيهات وورود" data-en="Bouquets &amp; Flowers" href="#cat-bouquets">بوكيهات وورود</a>
+<a class="chip" data-ar="هدايا وديكور" data-en="Gifts &amp; Decor" href="#cat-gifts">هدايا وديكور</a>
+<a class="chip" data-ar="أزياء مخصّصة" data-en="Personalized Apparel" href="#cat-apparel">أزياء مخصّصة</a>
+<a class="chip" data-ar="مواليد ومناسبات" data-en="Baby &amp; Events" href="#cat-baby">مواليد ومناسبات</a>
+<a class="chip" data-ar="إسلاميات وأذكار" data-en="Islamic &amp; Remembrance" href="#cat-islamic">إسلاميات وأذكار</a>
+<a class="chip" data-ar="إكسسوارات" data-en="Accessories" href="#cat-accessories">إكسسوارات</a>
+<div class="filters">
+<input aria-label="بحث / Search" class="search" id="search" placeholder="ابحثي…" type="search"/>
+<div class="price">
+<input aria-label="Minimum price" id="minPrice" inputmode="decimal" placeholder="min $" type="number"/>
+<span style="opacity:.6">–</span>
+<input aria-label="Maximum price" id="maxPrice" inputmode="decimal" placeholder="max $" type="number"/>
+</div>
+<button class="small-btn" data-ar="تصفية" data-en="Filter" id="applyFilters">تصفية</button>
+<button class="small-btn" data-ar="مسح" data-en="Clear" id="clearFilters">مسح</button>
+</div>
+</div>
+</div>
+<!-- ===================== SECTIONS (ACCORDION) ===================== -->
+<main class="wrap">
+<!-- 1) Graduation -->
+<details id="cat-graduation">
+<summary>🎓 <span data-ar="مجموعة التخرّج" data-en="Graduation Collection">مجموعة التخرّج</span></summary>
+<div class="cat-note" data-ar="محطات النجاح تستحق أناقة خاصة." data-en="Milestones deserve a touch of grace.">محطات النجاح تستحق أناقة خاصة.</div>
+<div class="grid">
+<!-- 01 Scarf -->
+<article class="card" data-cat="graduation" data-currency="LBP" data-price="0.60" data-title="وشاح تخرج Graduation Scarf">
+<div class="badge" data-ar="مخصّص بالاسم" data-en="Personalized Name">مخصّص بالاسم</div>
+<div class="carousel" data-interval="2400">
+<img alt="وشاح تخرج - أسود" class="active" src="img/scarf gr.jpg"/>
+<img alt="وشاح تخرج - أبيض" src="img/scarve.jpg"/>
+<img alt="وشاح تخرج - كحلي" src="img/scarf gr.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="وشاح تخرّج" data-en="Graduation Scarf">وشاح تخرّج</h3>
+<p class="desc" data-ar="متوفر بالأسود والأبيض والكحلي، مع طباعة حسب الطلب بدفء وأناقة." data-en="Available in black, white, and navy with custom printing.">
+           متوفر بالأسود والأبيض والكحلي، مع طباعة حسب الطلب بدفء وأناقة.
+        </p>
+<div class="price-tag" data-ar="السعر: ٦٠٠ ألف ل.ل" data-en="Price: 600,000 LBP">السعر: ٦٠٠ ألف ل.ل</div>
+<div class="quote" data-ar="ارتدِ فخرَك… ولفّي حكايتك." data-en="Wear your pride, wrap your story.">ارتدِ فخرَك… ولفّي حكايتك.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D9%88%D8%B4%D8%A7%D8%AD%20%D8%AA%D8%AE%D8%B1%D9%91%D8%AC%20%7C%20Graduation%20Scarf" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- 02 Sash with back ribbon -->
+<article class="card" data-cat="graduation" data-price="15" data-title="وشاح ربطة Sash Ribbon">
+<div class="carousel" data-interval="2600">
+<img alt="وشاح مع ربطة" class="active" src="img/grad.jpg"/>
+<img alt="تفاصيل الوشاح" src="img/scrav with back.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="وشاح تخرّج مع ربطة من الخلف" data-en="Graduation Sash with Back Ribbon">وشاح تخرّج مع ربطة من الخلف</h3>
+<p class="desc" data-ar="بالأسود والأبيض والكحلي، مع طباعة بجميع الألوان حسب الطلب." data-en="Black, white, or navy with full-color custom print.">
+           بالأسود والأبيض والكحلي، مع طباعة بجميع الألوان حسب الطلب.
+        </p>
+<div class="price-tag" data-ar="السعر: $15" data-en="Price: $15">$15</div>
+<div class="quote" data-ar="لمسة رقيقة ليوم يتوَّج بالفرح." data-en="A gentle touch for a crowned day.">لمسة رقيقة ليوم يتوَّج بالفرح.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D9%88%D8%B4%D8%A7%D8%AD%20%D8%AA%D8%AE%D8%B1%D9%91%D8%AC%20%D9%85%D8%B9%20%D8%B1%D8%A8%D8%B7%D8%A9%20%D9%85%D9%86%20%D8%A7%D9%84%D8%AE%D9%84%D9%81%20%7C%20Graduation%20Sash%20with%20Back%20Ribbon" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- 03 Graduation Cap -->
+<article class="card" data-cat="graduation" data-price="9" data-title="قبعة تخرج Graduation Cap">
+<div class="carousel" data-interval="2300">
+<img alt="قبعة تخرج" class="active" src="img/cap gr.jpg"/>
+<img alt="تفاصيل الطباعة" src="img/grad cap 2.jpg"/>
+<img alt="تفاصيل الطباعة" src="img/grad cap 3.jpg"/>
+<img alt="تفاصيل الطباعة" src="img/grad cap.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="قبّعة/طقّية تخرّج" data-en="Graduation Cap">قبّعة/طقّية تخرّج</h3>
+<p class="desc" data-ar="مع طباعة الاسم/الاختصاص/السنة حسب الطلب." data-en="Custom print: name, faculty, year.">مع طباعة الاسم/الاختصاص/السنة حسب الطلب.</p>
+<div class="price-tag" data-ar="السعر: $9" data-en="Price: $9">$9</div>
+<div class="quote" data-ar="ارفعوا القبّعات لبدايات أجمل." data-en="Tip your cap to new beginnings.">ارفعوا القبّعات لبدايات أجمل.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D9%82%D8%A8%D9%91%D8%B9%D8%A9/%D8%B7%D9%82%D9%91%D9%8A%D8%A9%20%D8%AA%D8%AE%D8%B1%D9%91%D8%AC%20%7C%20Graduation%20Cap" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+</div>
+</details>
+<!-- 2) Bouquets & Flowers -->
+<details id="cat-bouquets">
+<summary>🌸 <span data-ar="بوكيهات وورود" data-en="Bouquets &amp; Flowers">بوكيهات وورود</span></summary>
+<div class="cat-note" data-ar="قوليها برقّة الورد… وصدق المحبة." data-en="Say it softly with petals.">قوليها برقّة الورد… وصدق المحبة.</div>
+<div class="grid">
+<!-- 04 Flower Bouquet -->
+<article class="card" data-cat="bouquets" data-price="15" data-title="بوكيه ورد Flower Bouquet">
+<div class="carousel" data-interval="2400">
+<img alt="تفاصيل" src="img/boquet2.jpg"/>
+<img alt="ألوان متنوعة" src="img/boqu3.jpg"/>
+<img alt="بوكيه ورد" class="active" src="img/boq4.jpg"/>
+<img alt="بوكيه ورد" class="active" src="img/boq5.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="بوكيه ورد" data-en="Flower Bouquet">بوكيه ورد</h3>
+<p class="desc" data-ar="جميع أنواع الورود حسب الطلب، مع عبارة مخصّصة للمناسبة." data-en="Any flowers on request with a custom note.">جميع أنواع الورود حسب الطلب، مع عبارة مخصّصة للمناسبة.</p>
+<div class="price-tag" data-ar="السعر: ابتداءً من $15" data-en="From $15">السعر: ابتداءً من $15</div>
+<div class="quote" data-ar="حين تعجز الكلمات، تتكلم الورود." data-en="Where words end, flowers speak.">حين تعجز الكلمات، تتكلم الورود.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%A8%D9%88%D9%83%D9%8A%D9%87%20%D9%88%D8%B1%D8%AF%20%7C%20Flower%20Bouquet" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- 05 Butterfly Bouquet -->
+<article class="card" data-cat="bouquets" data-price="17" data-title="بوكيه فراشات Butterfly">
+<div class="carousel" data-interval="2600">
+<img alt="بوكيه فراشات" class="active" src="img/boq butt.jpg"/>
+<img alt="بوكيه فراشات" class="active" src="img/boq butt 2.jpg"/>
+<img alt="بوكيه فراشات" class="active" src="img/boq butt3.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="بوكيه فراشات" data-en="Butterfly Bouquet">بوكيه فراشات</h3>
+<p class="desc" data-ar="متوفر بجميع الألوان، مع إضاءة أو بدون حسب الطلب." data-en="All colors, with/without lights as requested.">متوفر بجميع الألوان، مع إضاءة أو بدون حسب الطلب.</p>
+<div class="price-tag" data-ar="$15 بدون إضاءة — $17 مع إضاءة" data-en="$15 no lights — $17 with lights">$15 بدون إضاءة — $17 مع إضاءة</div>
+<div class="quote" data-ar="دعي هديتكِ ترفرف فرحًا." data-en="Let your gift flutter with joy.">دعي هديتكِ ترفرف فرحًا.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%A8%D9%88%D9%83%D9%8A%D9%87%20%D9%81%D8%B1%D8%A7%D8%B4%D8%A7%D8%AA%20%7C%20Butterfly%20Bouquet" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- 06 Flower Giveaways -->
+<article class="card" data-cat="bouquets" data-price="0" data-title="توزيعات ورد Single Flowers">
+<div class="carousel" data-interval="2300">
+<img alt="توزيعات ورد" class="active" src="img/single boq2.jpg"/>
+<img alt="توزيعات ورد" class="active" src="img/single boq3.jpg"/>
+<img alt="توزيعات ملفوفة" src="img/single boq3.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="توزيعات ورد" data-en="Flower Giveaways">توزيعات ورد</h3>
+<p class="desc" data-ar="جميع أنواع وألوان الورد مع التغليف؛ السعر يتحدد حسب الكمية." data-en="All types &amp; colors with wrapping; price by quantity.">جميع أنواع وألوان الورد مع التغليف؛ السعر يتحدد حسب الكمية.</p>
+<div class="price-tag" data-ar="السعر حسب الكمية" data-en="Price by quantity">السعر حسب الكمية</div>
+<div class="quote" data-ar="زهور صغيرة… وابتسامات كبيرة." data-en="Little blooms, big smiles.">زهور صغيرة… وابتسامات كبيرة.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%D8%A7%D8%AA%20%D9%88%D8%B1%D8%AF%20%7C%20Flower%20Giveaways" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- 07 Bride Bouquet -->
+<article class="card" data-cat="bouquets" data-price="20" data-title="بوكيه عروس Bride Bouquet">
+<div class="carousel" data-interval="2400">
+<img alt="تنسيقات مختلفة" src="img/bride boq3.jpg"/>
+<img alt="تنسيقات مختلفة" src="img/bride boq2.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="بوكيه عروس" data-en="Bride Bouquet">بوكيه عروس</h3>
+<p class="desc" data-ar="جميع الألوان والأشكال، مع إضافة أسماء العرسان حسب الطلب." data-en="All colors &amp; styles with couple names on request.">جميع الألوان والأشكال، مع إضافة أسماء العرسان حسب الطلب.</p>
+<div class="price-tag" data-ar="السعر: ابتداءً من $20" data-en="From $20">السعر: ابتداءً من $20</div>
+<div class="quote" data-ar="أمسكي الحب بين يديكِ." data-en="Hold love in your hands.">أمسكي الحب بين يديكِ.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%A8%D9%88%D9%83%D9%8A%D9%87%20%D8%B9%D8%B1%D9%88%D8%B3%20%7C%20Bride%20Bouquet" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+</div>
+</details>
+<!-- 3) Gifts & Decor -->
+<details id="cat-gifts">
+<summary>🎁 <span data-ar="هدايا وديكور" data-en="Gifts &amp; Decor">هدايا وديكور</span></summary>
+<div class="cat-note" data-ar="ذكريات تدوم… نصنعها بقلب." data-en="Memories that last—crafted with heart.">ذكريات تدوم… نصنعها بقلب.</div>
+<div class="grid">
+<!-- 08 Gift Frame -->
+<article class="card" data-cat="gifts" data-currency="LBP" data-price="0.4" data-title="برواز هدية Gift Frame">
+<div class="carousel" data-interval="2200">
+<img alt="برواز هدية" class="active" src="img/farme main.jpg"/>
+<img alt="برواز هدية" class="active" src="img/frame 3.jpg"/>
+<img alt="برواز هدية" class="active" src="img/frame 7.jpg"/>
+
+
+<img alt="برواز هدية" class="active" src="img/frame5.jpg"/>
+<img alt="برواز هدية" class="active" src="img/frame6.jpg"/>
+<img alt="برواز مع تغليف" src="img/frame de 5.jpg"/>
+<img alt="برواز مع تغليف" src="img/frame dec 4.jpg"/>
+<img alt="برواز مع تغليف" src="img/frame dec2.jpg"/>
+
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="برواز هدية مع تغليف" data-en="Gift Frame with Packaging">برواز هدية مع تغليف</h3>
+<p class="desc" data-ar="التصميم حسب الطلب. دون تغليف: ٤٠٠ ألف ل.ل — مع تغليف: ٥٥٠ ألف ل.ل." data-en="Design on request. Frame only: 400k LBP — With packaging: 550k LBP.">
+           التصميم حسب الطلب. دون تغليف: ٤٠٠ ألف ل.ل — مع تغليف: ٥٥٠ ألف ل.ل.
+        </p>
+<div class="price-tag" data-ar="٤٠٠–٥٥٠ ألف ل.ل" data-en="400k–550k LBP">٤٠٠–٥٥٠ ألف ل.ل</div>
+<div class="quote" data-ar="أطرّي اللحظة… لتبقى جميلة." data-en="Frame the moment so it stays lovely.">أطرّي اللحظة… لتبقى جميلة.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%A8%D8%B1%D9%88%D8%A7%D8%B2%20%D9%87%D8%AF%D9%8A%D8%A9%20%D9%85%D8%B9%20%D8%AA%D8%BA%D9%84%D9%8A%D9%81%20%7C%20Gift%20Frame%20with%20Packaging" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- 09 Souvenir Distributions -->
+<article class="card" data-cat="gifts" data-price="0" data-title="توزيعات مناسبات Souvenirs">
+<div class="carousel" data-interval="2300">
+<img alt="توزيعات مناسبات" class="active" src="img/souv1.jpg">
+
+<img alt="توزيعات بالشوكولاتة" src="img/souv2.jpg"/>
+<img alt="توزيعات بالشوكولاتة" src="img/souv4.jpg"/>
+<img alt="توزيعات بالشوكولاتة" src="img/souv5.jpg"/>
+<img alt="توزيعات بالشوكولاتة" src="img/souv7.jpg"/>
+
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="توزيعات لجميع المناسبات" data-en="Souvenir Distributions (All Occasions)">توزيعات لجميع المناسبات</h3>
+<p class="desc" data-ar="التصميم حسب الطلب؛ السعر يحدده العدد ونوع الشوكولاتة/الخامات." data-en="Custom design; price depends on quantity &amp; chocolate/materials.">
+           التصميم حسب الطلب؛ السعر يحدده العدد ونوع الشوكولاتة/الخامات.
+        </p>
+<div class="price-tag" data-ar="السعر حسب الكمية والنوع" data-en="Price by quantity &amp; type">السعر حسب الكمية والنوع</div>
+<div class="quote" data-ar="تذكارات صغيرة… ومشاعر لا تزول." data-en="Tiny keepsakes, timeless feelings.">تذكارات صغيرة… ومشاعر لا تزول.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%D8%A7%D8%AA%20%D9%84%D8%AC%D9%85%D9%8A%D8%B9%20%D8%A7%D9%84%D9%85%D9%86%D8%A7%D8%B3%D8%A8%D8%A7%D8%AA%20%7C%20Souvenir%20Distributions%20%28All%20Occasions%29" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- 10 Wood photo with golden light -->
+<article class="card" data-cat="gifts" data-price="16" data-title="صورة خشبية بإضاءة Wood Light">
+<div class="carousel" data-interval="2400">
+<img alt="إضاءة دافئة" src="img/wood lig2.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="صورة خشبية بإضاءة ذهبية" data-en="Wood Photo with Golden Light">صورة خشبية بإضاءة ذهبية</h3>
+<p class="desc" data-ar="صورتكِ بإضاءة دافئة لجوٍ حالم." data-en="Your photo, warmly lit for a cozy glow.">صورتكِ بإضاءة دافئة لجوٍ حالم.</p>
+<div class="price-tag" data-ar="السعر: $16" data-en="Price: $16">$16</div>
+<div class="quote" data-ar="دعي الذكريات تضيء." data-en="Let your memories glow.">دعي الذكريات تضيء.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%B5%D9%88%D8%B1%D8%A9%20%D8%AE%D8%B4%D8%A8%D9%8A%D8%A9%20%D8%A8%D8%A5%D8%B6%D8%A7%D8%A1%D8%A9%20%D8%B0%D9%87%D8%A8%D9%8A%D8%A9%20%7C%20Wood%20Photo%20with%20Golden%20Light" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- 11 Glowing Moon -->
+<article class="card" data-cat="gifts" data-price="17" data-title="قمر مضيء Moon">
+<div class="carousel" data-interval="2200">
+<img alt="قمر مضيء" class="active" src="img/moon.jpg"/>
+<img alt="قمر مضيء" class="active" src="img/moon2.jpg"/>
+<img alt="قمر مضيء" class="active" src="img/moon3.jpg"/>
+
+<img alt="تحكم بالألوان" src="img/moon6.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="قمر مضيء (حجم كبير)" data-en="Glowing Moon (Large)">قمر مضيء (حجم كبير)</h3>
+<p class="desc" data-ar="مع إضاءة وشاحن وريموت؛ ألوان كاملة مع انتقالات. طباعة صورة/عبارة حسب الطلب." data-en="With light, charger &amp; remote; color modes &amp; transitions. Print photo/text on request.">
+           مع إضاءة وشاحن وريموت؛ ألوان كاملة مع انتقالات. طباعة صورة/عبارة حسب الطلب.
+        </p>
+<div class="price-tag" data-ar="السعر: $17" data-en="Price: $17">$17</div>
+<div class="quote" data-ar="قمر يُمسك المزاج… ويضيء المكان." data-en="A moon that holds the mood.">قمر يُمسك المزاج… ويضيء المكان.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D9%82%D9%85%D8%B1%20%D9%85%D8%B6%D9%8A%D8%A1%20%28%D8%AD%D8%AC%D9%85%20%D9%83%D8%A8%D9%8A%D8%B1%29%20%7C%20Glowing%20Moon%20%28Large%29" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- 12 Mug -->
+<article class="card" data-cat="gifts" data-currency="LBP" data-price="0.5" data-title="كوب Mug">
+<div class="carousel" data-interval="2100">
+<img alt="كوب مخصص" class="active" src="img/mug.jpg"/>
+<img alt="طباعة مخصصة" src="img/mug2.jpg"/>
+<img alt="طباعة مخصصة" src="img/mug3.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="كوب مع طباعة حسب الطلب" data-en="Customized Mug">كوب مع طباعة حسب الطلب</h3>
+<p class="desc" data-ar="أكواب جميلة بطباعة من اختيارك." data-en="Lovely mugs with your design.">أكواب جميلة بطباعة من اختيارك.</p>
+<div class="price-tag" data-ar="السعر: ٥٠٠ ألف ل.ل" data-en="Price: 500,000 LBP">السعر: ٥٠٠ ألف ل.ل</div>
+<div class="quote" data-ar="ابدئي يومكِ بابتسامة وكوبكِ المُفضّل." data-en="Start your day with a smile and your cup.">ابدئي يومكِ بابتسامة وكوبكِ المُفضّل.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D9%83%D9%88%D8%A8%20%D9%85%D8%B9%20%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%20%D8%AD%D8%B3%D8%A8%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8%20%7C%20Customized%20Mug" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- 13 Glowing Mirror -->
+<article class="card" data-cat="gifts" data-price="13" data-title="مرآة مضيئة Mirror">
+<div class="carousel" data-interval="2200">
+<img alt="مرآة مضيئة" class="active" src="img/glow pic.jpg"/>
+<img alt="طباعة صور" src="img/glow pic.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="مرآة مضيئة (مع طباعة)" data-en="Glowing Mirror (with Printing)">مرآة مضيئة (مع طباعة)</h3>
+<p class="desc" data-ar="طباعة صور أو عبارات حسب الطلب." data-en="Print photos or quotes as requested.">طباعة صور أو عبارات حسب الطلب.</p>
+<div class="price-tag" data-ar="السعر: $13" data-en="Price: $13">$13</div>
+<div class="quote" data-ar="عاكِس للفرح… مُؤطِّر للضوء." data-en="Reflect joy, frame light.">عاكِس للفرح… مُؤطِّر للضوء.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D9%85%D8%B1%D8%A2%D8%A9%20%D9%85%D8%B6%D9%8A%D8%A6%D8%A9%20%28%D9%85%D8%B9%20%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%29%20%7C%20Glowing%20Mirror%20%28with%20Printing%29" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- 14 Chocolate Bouquet -->
+<article class="card" data-cat="gifts" data-price="0" data-title="بوكيه شوكولاتة Chocolate">
+<div class="carousel" data-interval="2300">
+<img alt="بوكيه شوكولاتة" class="active" src="img/boq ch.jpg"/>
+<img alt="تغليف وشوكولاتة حسب الطلب" src="img/boq ch.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="بوكيه شوكولاتة" data-en="Chocolate Bouquet">بوكيه شوكولاتة</h3>
+<p class="desc" data-ar="التغليف ونوع الشوكولاتة حسب الطلب؛ السعر بحسب الحجم والنوع." data-en="Wrapping &amp; chocolate type by request; price by size/brand.">
+           التغليف ونوع الشوكولاتة حسب الطلب؛ السعر بحسب الحجم والنوع.
+        </p>
+<div class="price-tag" data-ar="السعر حسب الحجم والنوع" data-en="Price by size/type">السعر حسب الحجم والنوع</div>
+<div class="quote" data-ar="لحظاتٌ حلوة… تحتاج بتلاتٍ حلوة." data-en="Sweet moments deserve sweet petals.">لحظاتٌ حلوة… تحتاج بتلاتٍ حلوة.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%A8%D9%88%D9%83%D9%8A%D9%87%20%D8%B4%D9%88%D9%83%D9%88%D9%84%D8%A7%D8%AA%D8%A9%20%7C%20Chocolate%20Bouquet" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+
+<!-- Gift Box -->
+<article class="card" data-title="بوكس هدايا Gift Box" data-cat="gifts" data-price="0">
+  <div class="carousel" data-interval="2400">
+    <img src="img2]/box1.jpg" class="active" alt="بوكس هدايا">
+    <img src="img2]/box2.jpg" alt="بوكس هدايا">
+    <img src="img2]/box3.jpg" alt="بوكس هدايا">
+    <img src="img2]/box4.jpg" alt="بوكس هدايا">
+    <img src="img2]/box5.jpg" alt="بوكس هدايا">
+    <img src="img2]/box6.jpg" alt="بوكس هدايا">
+    <img src="img2]/box7.jpg" alt="بوكس هدايا">
+  </div>
+  <div class="dots"></div>
+  <h3 class="title" data-ar="بوكس هدايا" data-en="Gift Box">بوكس هدايا</h3>
+  <p class="desc" 
+     data-ar="الهدايا والبوكس وكل شي حسب الطلب"
+     data-en="Gifts and boxes, all customized as requested">
+     الهدايا والبوكس وكل شي حسب الطلب
+  </p>
+  <div class="price-tag" 
+       data-ar="السعر بيتحدد حسب البوكس والحجم والهدايا" 
+       data-en="Price depends on box, size, and gifts">
+       السعر بيتحدد حسب البوكس والحجم والهدايا
+  </div>
+  <div class="quote" 
+       data-ar="بوكس يجمّع تفاصيل الفرح." 
+       data-en="A box that gathers moments of joy.">
+       بوكس يجمّع تفاصيل الفرح.
+  </div>
+  <div class="cta-row">
+    <a class="ask" href="https://ig.me/m/reemrm_x1?text=بوكس%20هدايا%20|%20Gift%20Box" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#E1306C" viewBox="0 0 24 24" style="vertical-align:middle;margin-left:6px;">
+        <path d="M12 2.2c3.2 0 3.6 0 4.9.1 ..."/>
+      </svg>
+      اسألي
+    </a>
+    <a class="view" href="img/giftbox1.jpg" target="_blank">📷 الصور</a>
+  </div>
+</article>
+
+
+
+</div>
+</details>
+<!-- 4) Personalized Apparel -->
+<details id="cat-apparel">
+<summary>🧵 <span data-ar="أزياء مخصّصة" data-en="Personalized Apparel">أزياء مخصّصة</span></summary>
+<div class="cat-note" data-ar="أناقة تنطق باسمك." data-en="Style that speaks your name.">أناقة تنطق باسمك.</div>
+<div class="grid">
+<!-- 15 Hoodies -->
+<article class="card" data-cat="apparel" data-price="15" data-title="هودي Hoodies">
+<div class="carousel" data-interval="2400">
+<img alt="هودي مخصص" class="active" src="img/hoodi main.jpg"/>
+<img alt="هودي مخصص" class="active" src="img/hoodi4.jpg"/>
+<img alt="هودي مخصص" class="active" src="img/hoodi7.jpg"/>
+<img alt="هودي مخصص" class="active" src="img/hoodi8.jpg"/>
+<img alt="هودي مخصص" class="active" src="img/hoodi9.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="هودي مع طباعة حسب الطلب" data-en="Hoodies (Custom Print)">هودي مع طباعة حسب الطلب</h3>
+<p class="desc" data-ar="جميع الألوان، قماش صيفي وشتوي، مع طباعة حسب الطلب." data-en="All colors, summer &amp; winter fabrics, printed as requested.">
+           جميع الألوان، قماش صيفي وشتوي، مع طباعة حسب الطلب.
+        </p>
+<div class="price-tag" data-ar="السعر: $15 — قطعتان بـ $30" data-en="$15 — 2 for $30">$15 — 2 for $30</div>
+<div class="quote" data-ar="دفءٌ يلبس تصميمك." data-en="Wrap comfort in your own design.">دفءٌ يلبس تصميمك.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D9%87%D9%88%D8%AF%D9%8A%20%D9%85%D8%B9%20%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%20%D8%AD%D8%B3%D8%A8%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8%20%7C%20Hoodies%20%28Custom%20Print%29" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- Printing on baby clothes -->
+<article class="card" data-cat="apparel" data-price="0" data-title="طباعة على ملابس الأطفال">
+<div class="carousel" data-interval="2200">
+<img alt="طباعة على ملابس الأطفال" class="active" src="img/baby clo.jpg"/>
+<img alt="تصاميم أطفال" src="img/baby clo.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="طباعة على ملابس الأطفال" data-en="Printing on Baby Clothes">طباعة على ملابس الأطفال</h3>
+<p class="desc" data-ar="تصميمكِ المفضّل على أطقم المواليد وملابس الأطفال." data-en="Your design on newborn sets &amp; baby outfits.">
+           تصميمكِ المفضّل على أطقم المواليد وملابس الأطفال.
+        </p>
+<div class="price-tag" data-ar="السعر حسب الطباعة" data-en="Price by print">السعر حسب الطباعة</div>
+<div class="quote" data-ar="أطقم صغيرة… وذكريات كبيرة." data-en="Little outfits, big memories.">أطقم صغيرة… وذكريات كبيرة.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%20%D8%B9%D9%84%D9%89%20%D9%85%D9%84%D8%A7%D8%A8%D8%B3%20%D8%A7%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84%20%7C%20Printing%20on%20Baby%20Clothes" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+</div>
+</details>
+<!-- 5) Baby & Events -->
+<details id="cat-baby">
+<summary>👶 <span data-ar="مواليد ومناسبات" data-en="Baby &amp; Events">مواليد ومناسبات</span></summary>
+<div class="cat-note" data-ar="نستقبل الفرح بتفاصيل حنونة." data-en="Welcome joy with gentle details.">نستقبل الفرح بتفاصيل حنونة.</div>
+<div class="grid">
+<!-- Newborn door hanger -->
+<article class="card" data-cat="baby" data-price="0" data-title="تعليقة باب مولود Door Hanger">
+<div class="carousel" data-interval="2300">
+<img active"="" alt="تعليقة باب للمولود" src="img/babyarr.jpg"/>
+<img alt="تزيين حسب الطلب" src="img/babyarr.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="تعليقة باب للمولود" data-en="Newborn Door Hanger">تعليقة باب للمولود</h3>
+<p class="desc" data-ar="مع التزيين حسب الطلب؛ ويمكن تخصيصها لمناسبات أخرى." data-en="With decorations on request; can be adapted for other events.">
+           مع التزيين حسب الطلب؛ ويمكن تخصيصها لمناسبات أخرى.
+        </p>
+<div class="price-tag" data-ar="السعر يتحدد حسب التزيين" data-en="Price by decoration">السعر يتحدد حسب التزيين</div>
+<div class="quote" data-ar="أعلِنوا الحبّ على الباب." data-en="Announce love at the door.">أعلِنوا الحبّ على الباب.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%AA%D8%B9%D9%84%D9%8A%D9%82%D8%A9%20%D8%A8%D8%A7%D8%A8%20%D9%84%D9%84%D9%85%D9%88%D9%84%D9%88%D8%AF%20%7C%20Newborn%20Door%20Hanger" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+</div>
+</details>
+<!-- 6) Islamic & Remembrance -->
+<details id="cat-islamic">
+<summary>🕊 <span data-ar="إسلاميات وأذكار" data-en="Islamic &amp; Remembrance">إسلاميات وأذكار</span></summary>
+<div class="cat-note" data-ar="هدايا بمعنى… تُصنع بتوقير." data-en="Gifts with meaning, crafted with respect.">هدايا بمعنى… تُصنع بتوقير.</div>
+<div class="grid">
+<!-- Prayer Mat + Quran (set) -->
+<article class="card" data-cat="islamic" data-price="26" data-title="سجادة صلاة مع قرآن Prayer Set">
+<div class="carousel" data-interval="2300">
+<img alt="سجادة صلاة" class="active" src="img/matt qur.jpg"/>
+<img alt="مصحف" src="img/matt qur2.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="سجادة صلاة مع قرآن (مع الاسم)" data-en="Prayer Mat &amp; Quran (with Name)">سجادة صلاة مع قرآن (مع الاسم)</h3>
+<p class="desc" data-ar="كتابة الاسم حسب الطلب. سجادة: $15 — القرآن: $15 — معًا: $26." data-en="Personalized name. Mat: $15 — Quran: $15 — Set: $26.">
+           كتابة الاسم حسب الطلب. سجادة: $15 — القرآن: $15 — معًا: $26.
+        </p>
+<div class="price-tag" data-ar="$15 / $15 / $26 معًا" data-en="$15 / $15 / $26 set">$15 / $15 / $26 معًا</div>
+<div class="quote" data-ar="هدية نورٍ للروح." data-en="A gift of light for the soul.">هدية نورٍ للروح.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%B3%D8%AC%D8%A7%D8%AF%D8%A9%20%D8%B5%D9%84%D8%A7%D8%A9%20%D9%85%D8%B9%20%D9%82%D8%B1%D8%A2%D9%86%20%28%D9%85%D8%B9%20%D8%A7%D9%84%D8%A7%D8%B3%D9%85%29%20%7C%20Prayer%20Mat%20%26%20Quran%20%28with%20Name%29" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- Morning/Evening remembrance + e-rosary -->
+<article class="card" data-cat="islamic" data-price="0" data-title="بطاقات الأذكار مع مسبحة إلكترونية">
+<div class="carousel" data-interval="2200">
+<img alt="أذكار الصباح والمساء" class="active" src="img/morn.jpg"/>
+<img alt="مسبحة إلكترونية" src="img/morn2.jpg"/>
+<img alt="مسبحة إلكترونية" src="img/morn4.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="بطاقات أذكار + مسبحة إلكترونية" data-en="Remembrance Cards + e-Rosary">بطاقات أذكار + مسبحة إلكترونية</h3>
+<p class="desc" data-ar="السعر عند الطلب (مجموعات وأشكال متنوعة)." data-en="Price upon request (various sets).">السعر عند الطلب (مجموعات وأشكال متنوعة).</p>
+<div class="price-tag" data-ar="السعر عند الطلب" data-en="Price on request">السعر عند الطلب</div>
+<div class="quote" data-ar="قلوبٌ مطمئنة… وأذكارٌ بعذوبة." data-en="Hearts at peace, words with grace.">قلوبٌ مطمئنة… وأذكارٌ بعذوبة.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%A8%D8%B7%D8%A7%D9%82%D8%A7%D8%AA%20%D8%A3%D8%B0%D9%83%D8%A7%D8%B1%20%2B%20%D9%85%D8%B3%D8%A8%D8%AD%D8%A9%20%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A9%20%7C%20Remembrance%20Cards%20%2B%20e-Rosary" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+</div>
+</details>
+<!-- 7) Accessories -->
+<details id="cat-accessories">
+<summary>👜 <span data-ar="إكسسوارات" data-en="Accessories">إكسسوارات</span></summary>
+<div class="cat-note" data-ar="تفاصيل أخيرة… تُشبهك." data-en="Finishing touches that feel like you.">تفاصيل أخيرة… تُشبهك.</div>
+<div class="grid">
+<!-- Shoulder bag -->
+<article class="card" data-cat="accessories" data-currency="LBP" data-price="0.8" data-title="شنطة كتف Shoulder Bag">
+<div class="carousel" data-interval="2200">
+<img alt="شنطة كتف" class="active" src="img/bag.jpg"/>
+<img alt="طباعة حسب الطلب" src="img/bagmain.jpg"/>
+<img alt="طباعة حسب الطلب" src="img/bag3.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="شنطة كتف مع طباعة" data-en="Shoulder Bag (Custom Print)">شنطة كتف مع طباعة</h3>
+<p class="desc" data-ar="بالأسود أو الأبيض مع طباعة حسب الطلب." data-en="Black or white with custom print.">بالأسود أو الأبيض مع طباعة حسب الطلب.</p>
+<div class="price-tag" data-ar="السعر: ٨٠٠ ألف ل.ل" data-en="Price: 800,000 LBP">السعر: ٨٠٠ ألف ل.ل</div>
+<div class="quote" data-ar="احملي ذوقك بخِفّة وأناقة." data-en="Carry your style with ease.">احملي ذوقك بخِفّة وأناقة.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%B4%D9%86%D8%B7%D8%A9%20%D9%83%D8%AA%D9%81%20%D9%85%D8%B9%20%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%20%7C%20Shoulder%20Bag%20%28Custom%20Print%29" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- Wallet -->
+<article class="card" data-cat="accessories" data-currency="LBP" data-price="0.5" data-title="محفظة Wallet">
+<div class="carousel" data-interval="2100">
+<img alt="محفظة" class="active" src="img/wallet.jpg"/>
+<img alt="طباعة أسماء" src="img/wallet2.jpg"/>
+<img alt="طباعة أسماء" src="img/wallet3.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="محفظة مع طباعة" data-en="Wallet (Custom Print)">محفظة مع طباعة</h3>
+<p class="desc" data-ar="طباعة الأسماء/الصور حسب الطلب." data-en="Names/photos as requested.">طباعة الأسماء/الصور حسب الطلب.</p>
+<div class="price-tag" data-ar="السعر: ٥٠٠ ألف ل.ل" data-en="Price: 500,000 LBP">السعر: ٥٠٠ ألف ل.ل</div>
+<div class="quote" data-ar="توقيعُك… بحجم الجيب." data-en="Your signature, pocket-sized.">توقيعُك… بحجم الجيب.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D9%85%D8%AD%D9%81%D8%B8%D8%A9%20%D9%85%D8%B9%20%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%20%7C%20Wallet%20%28Custom%20Print%29" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- Quran box + contract stand -->
+<article class="card" data-cat="accessories" data-price="0" data-title="علبة قرآن + بصمة كتب كتاب">
+<div class="carousel" data-interval="2200">
+<img alt="ستاند كتب كتاب" class="active" src="img/box qur.jpg"/>
+<img alt="كتابة أسماء العرسان" src="img/boxqur2.jpg"/>
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="علبة قرآن بأسماء العرسان + ستاند كتب كتاب" data-en="Quran Box + Contract Stand">علبة قرآن بأسماء العرسان + ستاند كتب كتاب</h3>
+<p class="desc" data-ar="كتابة حسب الطلب وأحجام متعددة؛ السعر حسب الحجم والزينة." data-en="Custom writing &amp; sizes; price depends on size &amp; decoration.">
+           كتابة حسب الطلب وأحجام متعددة؛ السعر حسب الحجم والزينة.
+        </p>
+<div class="price-tag" data-ar="السعر عند الطلب" data-en="Price on request">السعر عند الطلب</div>
+<div class="quote" data-ar="بركةٌ مختومة بالأسماء." data-en="Blessings sealed with names.">بركةٌ مختومة بالأسماء.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D8%B9%D9%84%D8%A8%D8%A9%20%D9%82%D8%B1%D8%A2%D9%86%20%D8%A8%D8%A3%D8%B3%D9%85%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B9%D8%B1%D8%B3%D8%A7%D9%86%20%2B%20%D8%B3%D8%AA%D8%A7%D9%86%D8%AF%20%D9%83%D8%AA%D8%A8%20%D9%83%D8%AA%D8%A7%D8%A8%20%7C%20Quran%20Box%20%2B%20Contract%20Stand" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+<!-- Large wooden panels (30x40) -->
+<article class="card" data-cat="accessories" data-price="7" data-title="لوحات خشبية Large Panels">
+<div class="carousel" data-interval="2100">
+<img alt="لوحات خشبية 30x40" class="active" src="img/pain.jpg"/>
+<img alt="ألوان متعددة" src="img/pain2.jpg"/>
+<img alt="لوحات خشبية 30x40" class="active" src="img/pain3.jpg"/>
+
+</div>
+<div class="dots"></div>
+<h3 class="title" data-ar="لوحات خشبية كبيرة (30×40)" data-en="Large Wooden Panels (30×40)">لوحات خشبية كبيرة (30×40)</h3>
+<p class="desc" data-ar="جميع الألوان، طباعة حسب الطلب؛ مثالية للجدران والهدايا." data-en="All colors with custom print; perfect for walls &amp; gifts.">
+           جميع الألوان، طباعة حسب الطلب؛ مثالية للجدران والهدايا.
+        </p>
+<div class="price-tag" data-ar="السعر: ابتداءً من $7 للقطعة" data-en="From $7 / piece">السعر: ابتداءً من $7 للقطعة</div>
+<div class="quote" data-ar="حكايتكِ… على الحائط بأناقة." data-en="Your story, beautifully displayed.">حكايتكِ… على الحائط بأناقة.</div>
+<div class="cta-row">
+<a class="ask" href="https://ig.me/m/reemrm_x1?text=%D9%84%D9%88%D8%AD%D8%A7%D8%AA%20%D8%AE%D8%B4%D8%A8%D9%8A%D8%A9%20%D9%83%D8%A8%D9%8A%D8%B1%D8%A9%20%2830%C3%9740%29%20%7C%20Large%20Wooden%20Panels%20%2830%C3%9740%29" rel="noopener" target="_blank">
+<svg fill="#E1306C" height="18" style="vertical-align:middle;margin-left:6px;" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 0.1c-1.3.1-2.2.2-3 .5-.8.3-1.5.7-2.2 1.4C1.1 2.6.7 3.3.4 4.1.1 4.9 0 5.8 0 7.1 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.4 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.4-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.4.7 20.7.3 19.9 0c-.8-.3-1.7-.4-3-.5C15.7 0 15.3 0 12 0zm0 5.8A6.2 6.2 0 1 0 12 18.2 6.2 6.2 0 1 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.6a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 1 0 0-2.88z"></path>
+</svg>
+اسألي</a>
+<a class="view" href="#home">الصور</a>
+</div>
+</article>
+</div>
+</details>
+</main>
+<!-- ===================== CONTACT ===================== -->
+<section class="contact" id="contact">
+<h2 data-ar="تواصلي معنا" data-en="Get in Touch">تواصلي معنا</h2>
+<p class="cat-note" data-ar="طلبات مخصّصة • تصاميم خاصة • رد سريع عبر واتساب" data-en="Custom orders • Special designs • Quick replies on WhatsApp">
+     طلبات مخصّصة • تصاميم خاصة • رد سريع عبر واتساب
+  </p>
+<a class="linkpill" data-ar="دردشة واتساب" data-en="WhatsApp Chat" href="https://ig.me/m/reemrm_x1" rel="noopener" target="_blank">دردشة واتساب</a>
+<a class="linkpill" data-ar="إنستغرام reemrm_x1@" data-en="Instagram @reemrm_x1" href="https://instagram.com/reemrm_x1" rel="noopener" target="_blank">إنستغرام reemrm_x1@</a>
+<div>
+<img alt="QR لفتح إنستغرام reemrm_x1" class="qr" src="img/qr.jpg"/>
+</div>
+</section>
+<footer>
+<p data-ar="© ٢٠٢٥ ريـم ستور. جميع الحقوق محفوظة." data-en="© 2025 Reem Store. All rights reserved.">© ٢٠٢٥ ريـم ستور. جميع الحقوق محفوظة.</p>
+</footer>
+<!-- ===================== FLOATING BUTTONS ===================== -->
+<a aria-label="Instagram" class="fab ig" href="https://instagram.com/reemrm_x1" target="_blank">
+<!-- Instagram glyph -->
+<svg aria-hidden="true" fill="#fff" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM18 6.3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path></svg>
+</a>
+<a aria-label="WhatsApp" class="fab wa" href="https://ig.me/m/reemrm_x1" target="_blank">
+<!-- WhatsApp glyph -->
+<svg aria-hidden="true" fill="#fff" viewbox="0 0 32 32"><path d="M19.1 17.6c-.3-.1-1-.4-1.2-.5-.2-.1-.4-.2-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.6-1.5-3.7-3.3-.3-.5.3-.5.9-1.7.1-.2 0-.4 0-.5l-.5-1.2c-.2-.4-.3-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.7.7-1.1 1.6-1.1 2.6 0 .3.1.6.2.9.4 1.4 1.3 2.6 2.5 3.6 1.5 1.1 3.2 1.8 4.9 1.9.5 0 1 0 1.4-.1.4-.1 1.3-.5 1.5-1 .2-.5.2-1 .1-1.1-.1-.1-.4-.2-.6-.3z"></path><path d="M27.1 4.9A13 13 0 0 0 3.7 20.6L2 30l9.6-1.6A13 13 0 0 0 27.1 4.9zm-6.1 20.4c-2.1.9-4.5 1.1-6.8.6l-.5-.1-5.6.9.9-5.5-.2-.5A10.9 10.9 0 1 1 21 25.3z"></path></svg>
+</a>
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+  // ---------- Language Toggle (Arabic default) ----------
+  const langBtn = document.getElementById('langBtn');
+  let currentLang = 'ar'; // default Arabic
+  function applyLang(lang){
+    document.querySelectorAll('[data-ar]').forEach(el=>{
+      el.textContent = el.getAttribute(lang === 'ar' ? 'data-ar' : 'data-en');
+    });
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', lang);
+    langBtn.textContent = lang === 'ar' ? 'EN' : 'AR';
+  }
+  langBtn.addEventListener('click', ()=>{ currentLang = currentLang==='ar' ? 'en' : 'ar'; applyLang(currentLang); });
+  applyLang(currentLang);
+
+  // ---------- Mini carousels ----------
+  function initCarousel(wrapper){
+    const imgs = Array.from(wrapper.querySelectorAll('img'));
+    const dotsWrap = wrapper.parentElement.querySelector('.dots');
+    if(!imgs.length || !dotsWrap) return;
+    imgs.forEach((_,i)=>{
+      const d = document.createElement('span');
+      d.className = 'dot' + (i===0?' active':''); dotsWrap.appendChild(d);
+    });
+    const dots = dotsWrap.querySelectorAll('.dot');
+    let idx = 0; const interval = Number(wrapper.getAttribute('data-interval')) || 2500;
+    setInterval(()=>{
+      imgs[idx].classList.remove('active'); dots[idx].classList.remove('active');
+      idx = (idx+1) % imgs.length;
+      imgs[idx].classList.add('active'); dots[idx].classList.add('active');
+    }, interval);
+  }
+  document.querySelectorAll('.carousel').forEach(initCarousel);
+
+  // ---------- Filters (search + price) ----------
+  const searchInput = document.getElementById('search');
+  const minInput = document.getElementById('minPrice');
+  const maxInput = document.getElementById('maxPrice');
+  const applyBtn  = document.getElementById('applyFilters');
+  const clearBtn  = document.getElementById('clearFilters');
+
+  function normalizePrice(card){
+    // $ uses data-price in USD; LBP items tagged with data-currency="LBP" use same field for filtering as 0 (skip) unless min=0
+    const v = parseFloat(card.getAttribute('data-price') || '0');
+    return isNaN(v) ? 0 : v;
+  }
+  function matchesSearch(card, term){
+    if(!term) return true;
+    const t = (card.getAttribute('data-title')||'').toLowerCase();
+    return t.includes(term.toLowerCase());
+  }
+  function applyFilters(){
+    const term = searchInput.value.trim();
+    const min = parseFloat(minInput.value || ''); const max = parseFloat(maxInput.value || '');
+    document.querySelectorAll('.card').forEach(card=>{
+      const price = normalizePrice(card);
+      let ok = true;
+      if(term && !matchesSearch(card, term)) ok = false;
+      if(!isNaN(min) && price < min && price !== 0) ok = false;
+      if(!isNaN(max) && price > max && price !== 0) ok = false;
+      card.style.display = ok ? '' : 'none';
+    });
+  }
+  applyBtn.addEventListener('click', applyFilters);
+  clearBtn.addEventListener('click', ()=>{
+    searchInput.value = ''; minInput.value=''; maxInput.value='';
+    document.querySelectorAll('.card').forEach(c=>c.style.display='');
+  });
+
+  // ---------- Open section when jumped-to ----------
+  document.querySelectorAll('.chip').forEach(ch=>{
+    ch.addEventListener('click', (e)=>{
+      const id = ch.getAttribute('href');
+      const det = document.querySelector(id);
+      if(det && !det.open){ det.open = true; }
+    });
+  });
+
+  // ---------- Close all sections by default (open none; user opens on click) ----------
+  document.querySelectorAll('details').forEach(d => d.open = false);
+</script>
+</body>
+</html>
